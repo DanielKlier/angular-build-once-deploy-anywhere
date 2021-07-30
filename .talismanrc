@@ -1,0 +1,11 @@
+scopeconfig:
+  - scope: node
+fileignoreconfig:
+- filename: src/environments/environment.prod.ts
+  checksum: d3b87f33083eb6e9b7373c5652e4e9e9471d8c017f0c029bba2516e1fc293b3d
+- filename: src/environments/environment.ts
+  checksum: a2939eaff6aa58260608255541db260084b866b3bafb3eafdf5f3a3eadcf489f
+- filename: src/app/app.component.html
+  checksum: 5a7a71f3c4c5a99209ebf4a99884f0f8535eae61cee37f092b4c2e15c4591aee
+- filename: src/test.ts
+  checksum: c0908cb69feac8f4264296e4521316ee2fb5040d732a040a69e672d1237236d2

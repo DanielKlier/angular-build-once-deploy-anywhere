@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  web-staging:
+    build:
+      context: ..
+      dockerfile: docker/web/Dockerfile
+      args:
+        environment: staging
+    ports:
+      - "8081:80"
+  web-prod:
+    build:
+      context: ..
+      dockerfile: docker/web/Dockerfile
+      args:
+        environment: prod
+    ports:
+      - "8082:80"
