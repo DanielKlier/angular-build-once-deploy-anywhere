@@ -9,3 +9,7 @@ fileignoreconfig:
   checksum: 5a7a71f3c4c5a99209ebf4a99884f0f8535eae61cee37f092b4c2e15c4591aee
 - filename: src/test.ts
   checksum: c0908cb69feac8f4264296e4521316ee2fb5040d732a040a69e672d1237236d2
+- filename: infra/.terraform.lock.hcl
+  checksum: cfb5751ed01b4dba394b3982de44ec761355cb3d0adf015e01b2ee659105e7b9
+- filename: infra/terraform.tfstate
+  checksum: 767d99b0b04afe39c509b0e8a4c1f628e24a80dfd2ec3d75e96024affad3c414

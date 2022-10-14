@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm run ci:test
+reports:
+  coverage:
+    files:
+      - coverage/angular-build-once-deploy-anywhere/cobertura-coverage.xml
+    file-format: COBERTURAXML
+artifacts:
+  files:
+    - 'coverage/**/*'

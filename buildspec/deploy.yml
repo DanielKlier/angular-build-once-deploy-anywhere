@@ -1,0 +1,14 @@
+version: 0.2
+
+env:
+  variables:
+    PROJECT_PATH: ./dist/angular-build-once-deploy-anywhere
+phases:
+  build:
+    commands:
+      - aws s3 cp --recursive ${PROJECT_PATH}/ s3://${BUCKET}/${BUCKET_PREFIX}/
+      - aws s3 sync --delete ${PROJECT_PATH}/ s3://${BUCKET}/${BUCKET_PREFIX}/
+      - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/${BUCKET_PREFIX}/*"
+artifacts:
+  files:
+    - 'dist/**/*'

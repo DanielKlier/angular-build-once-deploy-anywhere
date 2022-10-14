@@ -1,12 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { APP_CONFIG, AppConfig } from './config';
 
 describe('AppComponent', () => {
+  let appConfig: AppConfig;
+
   beforeEach(async () => {
+    appConfig = {
+      apiUrl: 'http://localhost:3000',
+      environment: 'unit-test',
+      revision: '1'
+    }
+
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      providers: [
+        {provide: APP_CONFIG, useValue: appConfig}
+      ]
     }).compileComponents();
   });
 
@@ -28,4 +40,11 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('.content span').textContent).toContain('angular-build-once-deploy-anywhere app is running!');
   });
+
+  it('should show the environment on the page', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('[data-test-id="welcome-message"]').textContent).toContain('Welcome to unit-test');
+  })
 });
