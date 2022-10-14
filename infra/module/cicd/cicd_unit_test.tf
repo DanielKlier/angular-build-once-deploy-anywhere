@@ -79,7 +79,10 @@ data "aws_iam_policy_document" "codebuild_unit_test_role_policy" {
   statement {
     effect = "Allow"
     actions = [
-      "codebuild:CreateReportGroup"
+      "codebuild:CreateReportGroup",
+      "codebuild:CreateReport",
+      "codebuild:BatchPutCodeCoverages",
+      "codebuild:UpdateReport"
     ]
     resources = [
       "arn:aws:codebuild:eu-central-1:${data.aws_caller_identity.caller_identity.account_id}:report-group/klier-blog-pipeline-unit-test-coverage"

@@ -1,5 +1,5 @@
 {
-  "revision": "1",
+  "revision": "{{REVISION}}",
   "environment": "prod",
   "apiUrl": "http://localhost:8082"
 }

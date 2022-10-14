@@ -1,5 +1,5 @@
 {
-  "revision": "1",
+  "revision": "{{REVISION}}",
   "environment": "staging",
   "apiUrl": "http://localhost:8081"
 }

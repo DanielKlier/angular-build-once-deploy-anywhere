@@ -7,9 +7,14 @@ phases:
   pre_build:
     commands:
       - npm install
+      - export REVISION=$(git rev-parse --short HEAD)
   build:
     commands:
       - npm run build
+      - sed -i "s/{{REVISION}}/$REVISION/" ./config/prod.json
+      - sed -i "s/{{REVISION}}/$REVISION/" ./config/staging.json
 artifacts:
   files:
+    - 'buildspec/**/*'
     - 'dist/**/*'
+    - 'config/**/*'
