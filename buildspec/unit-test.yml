@@ -4,6 +4,11 @@ phases:
   install:
     runtime-versions:
       nodejs: 16
+    commands:
+      - curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+      - echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - apt-get -y update && apt-get -y install google-chrome-stable
   pre_build:
     commands:
       - npm install

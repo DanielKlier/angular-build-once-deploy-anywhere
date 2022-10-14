@@ -53,4 +53,25 @@ data "aws_iam_policy_document" "codebuild_lint_role_policy" {
     ]
     resources = ["*"]
   }
+
+  statement {
+    effect  = "Allow"
+    actions = [
+      "s3:ListObjects",
+      "s3:GetObject",
+      "s3:ListBucket"
+    ]
+    resources = [
+      aws_s3_bucket.pipeline_bucket.arn,
+      "${aws_s3_bucket.pipeline_bucket.arn}/*"
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "codestar-connections:UseConnection"
+    ]
+    resources = [aws_codestarconnections_connection.github.arn]
+  }
 }

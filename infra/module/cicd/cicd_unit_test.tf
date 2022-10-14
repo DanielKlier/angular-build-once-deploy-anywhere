@@ -53,4 +53,36 @@ data "aws_iam_policy_document" "codebuild_unit_test_role_policy" {
     ]
     resources = ["*"]
   }
+
+  statement {
+    effect  = "Allow"
+    actions = [
+      "s3:ListObjects",
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:PutObject"
+    ]
+    resources = [
+      aws_s3_bucket.pipeline_bucket.arn,
+      "${aws_s3_bucket.pipeline_bucket.arn}/*"
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "codestar-connections:UseConnection"
+    ]
+    resources = [aws_codestarconnections_connection.github.arn]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "codebuild:CreateReportGroup"
+    ]
+    resources = [
+      "arn:aws:codebuild:eu-central-1:${data.aws_caller_identity.caller_identity.account_id}:report-group/klier-blog-pipeline-unit-test-coverage"
+    ]
+  }
 }

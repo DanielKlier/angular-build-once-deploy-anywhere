@@ -72,6 +72,19 @@ data "aws_iam_policy_document" "codebuild_deploy_test_role_policy" {
   statement {
     effect  = "Allow"
     actions = [
+      "s3:ListObjects",
+      "s3:GetObject",
+      "s3:ListBucket"
+    ]
+    resources = [
+      aws_s3_bucket.pipeline_bucket.arn,
+      "${aws_s3_bucket.pipeline_bucket.arn}/*"
+    ]
+  }
+
+  statement {
+    effect  = "Allow"
+    actions = [
       "s3:DeleteObject",
       "s3:GetBucketLocation",
       "s3:GetObject",

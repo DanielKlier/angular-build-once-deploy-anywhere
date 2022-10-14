@@ -43,4 +43,15 @@ data "aws_iam_policy_document" "pipeline" {
       aws_codebuild_project.deploy_prod.arn,
     ]
   }
+
+  statement {
+    effect  = "Allow"
+    actions = [
+      "s3:*"
+    ]
+    resources = [
+      aws_s3_bucket.pipeline_bucket.arn,
+      "${aws_s3_bucket.pipeline_bucket.arn}/*"
+    ]
+  }
 }
