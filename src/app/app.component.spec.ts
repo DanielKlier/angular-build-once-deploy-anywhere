@@ -9,7 +9,7 @@ describe('AppComponent', () => {
     appConfig = {
       apiUrl: 'http://localhost:3000',
       environment: 'unit-test',
-      revision: '1'
+      revision: 'a23de67'
     }
 
     await TestBed.configureTestingModule({
@@ -45,6 +45,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('[data-test-id="welcome-message"]').textContent).toContain('Welcome to unit-test');
+    expect(compiled.querySelector('[data-test-id="welcome-message"]').textContent).toContain(`Welcome to ${appConfig.environment} (revision ${appConfig.revision})`);
   })
 });

@@ -7,10 +7,9 @@ import { APP_CONFIG, AppConfig } from './config';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-build-once-deploy-anywhere';
-  environment: string;
+  readonly title = 'angular-build-once-deploy-anywhere';
+  readonly environment = this.config.environment;
+  readonly revision = this.config.revision;
 
-  constructor(@Inject(APP_CONFIG) private readonly config: AppConfig) {
-    this.environment = config.environment;
-  }
+  constructor(@Inject(APP_CONFIG) private readonly config: AppConfig) {}
 }
