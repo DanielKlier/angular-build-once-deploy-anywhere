@@ -86,13 +86,22 @@ data "aws_iam_policy_document" "codebuild_deploy_staging_role_policy" {
     effect  = "Allow"
     actions = [
       "s3:DeleteObject",
-      "s3:GetBucketLocation",
       "s3:GetObject",
-      "s3:ListBucket",
       "s3:PutObject"
     ]
     resources = [
       "${data.aws_s3_bucket.deploy_bucket.arn}/staging/*"
+    ]
+  }
+
+  statement {
+    effect  = "Allow"
+    actions = [
+      "s3:GetBucketLocation",
+      "s3:ListBucket",
+    ]
+    resources = [
+      data.aws_s3_bucket.deploy_bucket.arn
     ]
   }
 
