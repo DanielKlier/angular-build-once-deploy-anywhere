@@ -1,7 +1,7 @@
-resource "aws_codebuild_project" "deploy_test" {
-  name = "klier-blog-pipeline-deploy-test"
+resource "aws_codebuild_project" "deploy_staging" {
+  name = "klier-blog-pipeline-deploy-staging"
 
-  service_role = aws_iam_role.deploy_test_service_role.arn
+  service_role = aws_iam_role.deploy_staging_service_role.arn
 
   artifacts {
     type = "CODEPIPELINE"
@@ -19,12 +19,12 @@ resource "aws_codebuild_project" "deploy_test" {
 
     environment_variable {
       name  = "DISTRIBUTION_ID"
-      value = var.cloudfront_test_dist_id
+      value = var.cloudfront_staging_dist_id
     }
 
     environment_variable {
-      name  = "BUCKET_PREFIX"
-      value = "test"
+      name  = "ENV"
+      value = "staging"
     }
   }
 
@@ -35,12 +35,12 @@ resource "aws_codebuild_project" "deploy_test" {
 }
 
 
-resource "aws_iam_role" "deploy_test_service_role" {
-  name               = "klier-blog-pipeline-deploy-test"
-  assume_role_policy = data.aws_iam_policy_document.deploy_test_service_assume_role_policy.json
+resource "aws_iam_role" "deploy_staging_service_role" {
+  name               = "klier-blog-pipeline-deploy-staging"
+  assume_role_policy = data.aws_iam_policy_document.deploy_staging_service_assume_role_policy.json
 }
 
-data "aws_iam_policy_document" "deploy_test_service_assume_role_policy" {
+data "aws_iam_policy_document" "deploy_staging_service_assume_role_policy" {
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
@@ -52,13 +52,13 @@ data "aws_iam_policy_document" "deploy_test_service_assume_role_policy" {
   }
 }
 
-resource "aws_iam_role_policy" "codebuild_deploy_test_role_policy" {
-  name   = "klier-blog-pipeline-deploy-test"
-  role   = aws_iam_role.deploy_test_service_role.name
-  policy = data.aws_iam_policy_document.codebuild_deploy_test_role_policy.json
+resource "aws_iam_role_policy" "codebuild_deploy_staging_role_policy" {
+  name   = "klier-blog-pipeline-deploy-staging"
+  role   = aws_iam_role.deploy_staging_service_role.name
+  policy = data.aws_iam_policy_document.codebuild_deploy_staging_role_policy.json
 }
 
-data "aws_iam_policy_document" "codebuild_deploy_test_role_policy" {
+data "aws_iam_policy_document" "codebuild_deploy_staging_role_policy" {
   statement {
     effect  = "Allow"
     actions = [
@@ -92,7 +92,7 @@ data "aws_iam_policy_document" "codebuild_deploy_test_role_policy" {
       "s3:PutObject"
     ]
     resources = [
-      "${data.aws_s3_bucket.deploy_bucket.arn}/test/*"
+      "${data.aws_s3_bucket.deploy_bucket.arn}/staging/*"
     ]
   }
 
@@ -102,7 +102,7 @@ data "aws_iam_policy_document" "codebuild_deploy_test_role_policy" {
       "cloudfront:CreateInvalidation"
     ]
     resources = [
-      data.aws_cloudfront_distribution.test.arn
+      data.aws_cloudfront_distribution.staging.arn
     ]
   }
 }

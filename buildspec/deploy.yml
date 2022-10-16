@@ -7,8 +7,8 @@ phases:
   build:
     commands:
       - cp ./config/${ENV}.json ${PROJECT_PATH}/assets/config.json
-      - aws s3 cp --recursive ${PROJECT_PATH}/ s3://${BUCKET}/${BUCKET_PREFIX}/
-      - aws s3 sync --delete ${PROJECT_PATH}/ s3://${BUCKET}/${BUCKET_PREFIX}/
+      - aws s3 cp --recursive ${PROJECT_PATH}/ s3://${BUCKET}/${ENV}/
+      - aws s3 sync --delete ${PROJECT_PATH}/ s3://${BUCKET}/${ENV}/
       - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/${BUCKET_PREFIX}/*"
 artifacts:
   files:

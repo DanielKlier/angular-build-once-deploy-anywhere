@@ -23,7 +23,7 @@ resource "aws_codebuild_project" "deploy_prod" {
     }
 
     environment_variable {
-      name  = "BUCKET_PREFIX"
+      name  = "ENV"
       value = "prod"
     }
   }

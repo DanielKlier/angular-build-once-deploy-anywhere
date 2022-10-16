@@ -14,9 +14,9 @@ data "aws_iam_policy_document" "frontend_deployment_bucket_access" {
   statement {
     actions   = ["s3:GetObject"]
     effect    = "Allow"
-    resources = ["${aws_s3_bucket.frontend_deployment.arn}/test/*"]
+    resources = ["${aws_s3_bucket.frontend_deployment.arn}/staging/*"]
     principals {
-      identifiers = [module.cloudfront_test.origin_access_identity_iam_arn]
+      identifiers = [module.cloudfront_staging.origin_access_identity_iam_arn]
       type        = "AWS"
     }
   }

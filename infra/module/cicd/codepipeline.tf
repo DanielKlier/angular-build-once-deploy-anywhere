@@ -73,10 +73,10 @@ resource "aws_codepipeline" "pipeline" {
   }
 
   stage {
-    name = "DeployTest"
+    name = "DeployStaging"
     action {
       category        = "Build"
-      name            = "DeployTest"
+      name            = "DeployStaging"
       owner           = "AWS"
       provider        = "CodeBuild"
       version         = "1"
@@ -84,7 +84,7 @@ resource "aws_codepipeline" "pipeline" {
       run_order       = 1
 
       configuration = {
-        ProjectName = aws_codebuild_project.deploy_test.name
+        ProjectName = aws_codebuild_project.deploy_staging.name
       }
     }
   }

@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "pipeline" {
       aws_codebuild_project.build.arn,
       aws_codebuild_project.unit_test.arn,
       aws_codebuild_project.lint.arn,
-      aws_codebuild_project.deploy_test.arn,
+      aws_codebuild_project.deploy_staging.arn,
       aws_codebuild_project.deploy_prod.arn,
     ]
   }
